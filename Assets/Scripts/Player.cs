@@ -13,10 +13,13 @@ public class Player : MonoBehaviour
     public bool grounded;
     private Vector2 movement;
 
+    public Animator anim;
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -58,6 +61,12 @@ public class Player : MonoBehaviour
             Debug.Log("Jump");
             Jump();
         }
+
+        grounded = isGrounded();
+        //Animation
+        anim.SetBool("grounded", grounded);
+        anim.SetBool("move", horizontalInput != 0f);
+
     }
 
     public void Jump()
