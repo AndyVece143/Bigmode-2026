@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public float time;
     public TMP_Text timerText;
     public TMP_Text coinText;
+    public Checkpoint activeCheckpoint;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
