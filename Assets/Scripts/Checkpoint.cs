@@ -7,6 +7,7 @@ public class Checkpoint : MonoBehaviour
     private float distance;
     private bool active = false;
     public Animator anim;
+    [SerializeField] private AudioClip powerUp;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,6 +31,7 @@ public class Checkpoint : MonoBehaviour
         {
             active = true;
             gameManager.activeCheckpoint = gameObject.GetComponent<Checkpoint>();
+            SoundManager.instance.PlaySound(powerUp);
         }
     }
 }

@@ -127,3 +127,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Checkpoint
   anim: {fileID: 0}
+  powerUp: {fileID: 8300000, guid: 5dcae103728e08c488de7069443bcc8f, type: 3}

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Danger
+  - Enemy
+  - Weakpoint
   layers:
   - Default
   - TransparentFX

@@ -23,6 +23,9 @@ public class Player : MonoBehaviour
     private GameManager gameManager;
     public Vector2 initialRespawnPosition;
 
+    [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private AudioClip deathSound;
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
@@ -101,15 +104,15 @@ public class Player : MonoBehaviour
                     Jump();
                 }
 
-                if (Input.GetKey(KeyCode.K))
-                {
-                    StartKnockback();
-                }
+                //if (Input.GetKey(KeyCode.K))
+                //{
+                //    StartKnockback();
+                //}
 
-                if (Input.GetKey(KeyCode.Y))
-                {
-                    Death();
-                }
+                //if (Input.GetKey(KeyCode.Y))
+                //{
+                //    Death();
+                //}
                     
 
                 grounded = isGrounded();
@@ -126,6 +129,7 @@ public class Player : MonoBehaviour
     {
         body.linearVelocity = new Vector2(body.linearVelocity.x, jumpForce);
         grounded = false;
+        SoundManager.instance.PlaySound(jumpSound);
     }
 
     private bool isGrounded()
@@ -134,16 +138,30 @@ public class Player : MonoBehaviour
         return raycastHit.collider != null;
     }
 
+    public void StopMoving()
+    {
+        body.linearVelocity = new Vector2(0, 0);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "Danger")
         {
             canMove = false;
             body.linearVelocity = new Vector2(0, 0);
+            SoundManager.instance.PlaySound(deathSound);
             Death();
             //Respawn();
         }
+
+        if (collision.collider.tag == "Enemy")
+        {
+            SoundManager.instance.PlaySound(deathSound);
+            StartKnockback();
+        }
     }
+
+
 
     //private void OnTriggerEnter2D(Collider2D collision)
     //{
